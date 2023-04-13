@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 class Square extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: null
+        };
+    }
+    //В JavaScript-классах вам всегда нужно вызывать super при объявлении 
+    //конструктора подкласса. Все классовые React-компоненты, у которых есть 
+    //constructor, должны начинаться с вызова super(props).
+
     render() {
         return (
-            <button className="square">
-                {this.props.value}
-            </button>
+            <button className="square"
+                onClick={() => { this.setState({ value: 'X' }) }}>
+                {this.state.value}
+            </button >
         );
     }
 }
