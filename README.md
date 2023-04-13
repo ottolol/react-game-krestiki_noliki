@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Пишем игру Крестики и нолики по гайду на сайте https://ru.reactjs.org/tutorial/tutorial.html
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
