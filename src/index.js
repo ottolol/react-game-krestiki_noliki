@@ -2,41 +2,43 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-class Square extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: null
-        };
-    }
-    //В JavaScript-классах вам всегда нужно вызывать super при объявлении 
-    //конструктора подкласса. Все классовые React-компоненты, у которых есть 
-    //constructor, должны начинаться с вызова super(props).
-
-    render() {
-        return (
-            <button className="square"
-                onClick={() => { this.setState({ value: 'X' }) }}>
-                {this.state.value}
-            </button >
-        );
-    }
+function Square(props) {
+    return (
+        <button className="square" onClick={props.onClick}>
+            {props.value}
+        </button>
+    );
 }
 
 class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            squares: Array(9).fill(null)
+            squares: Array(9).fill(null),
+            xIsNext: true,
         };
     }
 
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = this.state.xIsNext ? 'X' : 'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        });
+    }
+
     renderSquare(i) {
-        return <Square value={this.state.squares[i]} />;
+        return (
+            <Square
+                value={this.state.squares[i]}
+                onClick={() => this.handleClick(i)}
+            />
+        );
     }
 
     render() {
-        const status = 'Next player: X';
+        const status = 'Следующий ход: X' + (this.state.xIsNext ? 'X' : 'O');
 
         return (
             <div>
